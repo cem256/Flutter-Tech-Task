@@ -5,6 +5,12 @@ import 'package:flutter_tech_task/feature/pokemon/data/repositories/pokemon_repo
 import 'package:flutter_tech_task/feature/pokemon/domain/repositories/pokemon_repository.dart';
 import 'package:flutter_tech_task/feature/pokemon/domain/usecases/uc_get_pokemons.dart';
 import 'package:flutter_tech_task/feature/pokemon/presentation/bloc/pokemon_list_bloc.dart';
+import 'package:flutter_tech_task/feature/pokemon_details/data/datasources/pokemon_details_remote_datasource.dart';
+import 'package:flutter_tech_task/feature/pokemon_details/data/repositories/pokemon_details_repository_impl.dart';
+import 'package:flutter_tech_task/feature/pokemon_details/domain/repositories/pokemon_details_repository.dart';
+import 'package:flutter_tech_task/feature/pokemon_details/domain/usecases/uc_get_pokemon_details.dart';
+import 'package:flutter_tech_task/feature/pokemon_details/presentation/cubit/pokemon_details_cubit.dart';
+
 import 'package:get_it/get_it.dart';
 
 /// [Locator] is responsible for locating and registering all the
@@ -15,19 +21,26 @@ abstract final class Locator {
 
   static PokemonListBloc get pokemonListBloc => _instance<PokemonListBloc>();
 
+  static PokemonDetailsCubit get pokemonDetailsCubit => _instance<PokemonDetailsCubit>();
+
   static Future<void> locateServices({required String baseUrl}) async {
     // Blocs
     _instance
-      ..registerFactory(() => PokemonListBloc(ucGetPokemonns: _instance()))
+      ..registerFactory(() => PokemonListBloc(ucGetPokemons: _instance()))
+      ..registerFactory(() => PokemonDetailsCubit(ucGetPokemonDetails: _instance()))
 
       // Usecases
-      ..registerFactory(() => UCGetPokemonns(repository: _instance()))
+      ..registerFactory(() => UCGetPokemons(repository: _instance()))
+      ..registerFactory(() => UCGetPokemonDetails(repository: _instance()))
 
       // Repositories
       ..registerFactory<PokemonRepository>(() => PokemonRepositoryImpl(dataSource: _instance()))
-
+      ..registerFactory<PokemonDetailsRepository>(() => PokemonDetailsRepositoryImpl(dataSource: _instance()))
       // Data Sources
       ..registerFactory<PokemonRemoteDataSource>(() => PokemonRemoteDataSourceImpl(networkClient: _instance()))
+      ..registerFactory<PokemonDetailsRemoteDataSource>(
+        () => PokemonDetailsRemoteDataSourceImpl(networkClient: _instance()),
+      )
 
       // Clients
 

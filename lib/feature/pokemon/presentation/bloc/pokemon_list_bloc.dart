@@ -13,8 +13,8 @@ part 'pokemon_list_event.dart';
 part 'pokemon_list_state.dart';
 
 class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
-  PokemonListBloc({required UCGetPokemonns ucGetPokemonns})
-      : _ucGetPokemonns = ucGetPokemonns,
+  PokemonListBloc({required UCGetPokemons ucGetPokemons})
+      : _ucGetPokemons = ucGetPokemons,
         super(const PokemonListState()) {
     on<PokemonListFetched>(
       _onPokemonListFetched,
@@ -24,12 +24,12 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
   int _offset = 0;
   final int _limit = 20;
 
-  final UCGetPokemonns _ucGetPokemonns;
+  final UCGetPokemons _ucGetPokemons;
 
   Future<void> _onPokemonListFetched(PokemonListFetched event, Emitter<PokemonListState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == ViewStatus.loading) {
-      final result = await _ucGetPokemonns(offset: _offset, limit: _limit);
+      final result = await _ucGetPokemons(offset: _offset, limit: _limit);
       return result.fold((failure) => emit(state.copyWith(status: ViewStatus.failure, failure: failure)), (success) {
         _offset += _limit;
         emit(
@@ -43,7 +43,7 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
         );
       });
     }
-    final result = await _ucGetPokemonns(offset: _offset, limit: _limit);
+    final result = await _ucGetPokemons(offset: _offset, limit: _limit);
     result.fold((failure) => emit(state.copyWith(status: ViewStatus.failure, failure: failure)), (success) {
       _offset += _limit;
       emit(
