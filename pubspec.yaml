@@ -51,6 +51,9 @@ dev_dependencies:
   envied_generator: ^0.3.0+3
   auto_route_generator: ^7.3.1
 
+  # Testing
+  mocktail: ^1.0.0
+
   # Linter
   very_good_analysis: ^5.1.0
 

@@ -26,8 +26,10 @@ class FlutterTechTask extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Theme
-        theme: ThemeData(useMaterial3: true),
-        darkTheme: ThemeData.dark(useMaterial3: true),
+        theme: ThemeData(
+          colorSchemeSeed: Colors.orange,
+          useMaterial3: true,
+        ),
 
         // Routing
         routerConfig: _appRouter.config(

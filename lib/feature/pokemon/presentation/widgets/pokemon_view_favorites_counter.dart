@@ -15,7 +15,10 @@ class _PokemonViewFavoritesCounter extends StatelessWidget {
                 Icons.star_rate_rounded,
                 color: context.theme.colorScheme.error,
               ),
-              Text(state.pokemons.length.toString()),
+              Text(
+                state.pokemons.length.toString(),
+                style: context.textTheme.bodyLarge,
+              ),
             ],
           ),
         );
