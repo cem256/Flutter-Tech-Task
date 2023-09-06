@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tech_task/app/env/env.dart';
 import 'package:flutter_tech_task/app/router/app_router.dart';
 import 'package:flutter_tech_task/app/router/custom_route_observer.dart';
+import 'package:flutter_tech_task/core/utils/observers/custom_bloc_observer.dart';
+import 'package:flutter_tech_task/locator.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Bloc Observer
+  Bloc.observer = CustomBlocObserver();
+
+  // Set Screen Orientation
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
+
+  // Initialize Locator
+  await Locator.locateServices(baseUrl: Env.baseUrl);
+
   runApp(FlutterTechTask());
 }
 
