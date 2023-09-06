@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tech_task/app/errors/failures/failures.dart';
+import 'package:flutter_tech_task/app/widgets/button/favorites_button_widget.dart';
 import 'package:flutter_tech_task/app/widgets/error/custom_error_widget.dart';
 import 'package:flutter_tech_task/core/enums/view_status.dart';
 import 'package:flutter_tech_task/core/extensions/string_extensions.dart';
@@ -23,6 +24,11 @@ class PokemonDetailsView extends StatelessWidget {
         title: Text(
           pokemon.name.capitalizeFirstLetter(),
         ),
+        actions: [
+          FavoritesButtonWidget(
+            pokemon: pokemon,
+          ),
+        ],
       ),
       body: BlocProvider<PokemonDetailsCubit>(
         create: (context) => Locator.pokemonDetailsCubit..getPokemonDetails(name: pokemon.name),

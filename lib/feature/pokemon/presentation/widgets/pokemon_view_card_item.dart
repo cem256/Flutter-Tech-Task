@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tech_task/app/widgets/button/favorites_button_widget.dart';
 import 'package:flutter_tech_task/core/extensions/string_extensions.dart';
 import 'package:flutter_tech_task/feature/pokemon/domain/entities/pokemon/pokemon_entity.dart';
 
@@ -15,9 +16,8 @@ class PokemonViewCardItem extends StatelessWidget {
           Positioned(
             top: 0,
             right: 0,
-            child: IconButton(
-              icon: const Icon(Icons.star_rate_rounded),
-              onPressed: () {},
+            child: FavoritesButtonWidget(
+              pokemon: pokemon,
             ),
           ),
           Center(

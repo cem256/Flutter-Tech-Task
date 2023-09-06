@@ -6,12 +6,14 @@ import 'package:flutter_tech_task/app/router/app_router.gr.dart';
 import 'package:flutter_tech_task/app/widgets/error/custom_error_widget.dart';
 import 'package:flutter_tech_task/core/enums/view_status.dart';
 import 'package:flutter_tech_task/core/extensions/context_extensions.dart';
+import 'package:flutter_tech_task/feature/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:flutter_tech_task/feature/pokemon/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:flutter_tech_task/feature/pokemon/presentation/bloc/pokemon_list_bloc.dart';
 import 'package:flutter_tech_task/feature/pokemon/presentation/widgets/pokemon_view_card_item.dart';
 import 'package:flutter_tech_task/locator.dart';
 
 part '../widgets/pokemon_view_success_widget.dart';
+part '../widgets/pokemon_view_favorites_counter.dart';
 
 @RoutePage()
 class PokemonView extends StatelessWidget {
@@ -22,6 +24,7 @@ class PokemonView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokedex'),
+        actions: const [_PokemonViewFavoritesCounter()],
       ),
       body: BlocProvider<PokemonListBloc>(
         create: (context) => Locator.pokemonListBloc..add(PokemonListFetched()),
