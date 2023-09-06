@@ -1,16 +1,13 @@
-# flutter_tech_task
+# Flutter Tech Task
 
-A new Flutter project.
+To run the project make sure that you have at least Flutter 3.13.2 installed
 
-## Getting Started
+## Folder Structure
 
-This project is a starting point for a Flutter application.
+- "app" folder holds files specific to this particular application.
+- "core" folder contains application-agnostic code that can be reused in other projects.
+- "feature" folder represents the app's feature set. Each feature is divided into subfolders for data, domain, and presentation.
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Clean Architecture](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course#readme)
